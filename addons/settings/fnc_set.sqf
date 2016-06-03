@@ -17,6 +17,7 @@ Returns:
         2: server source in SP
         3: server source, but no access
         4: mission source, but not in 3DEN editor
+        5: new setting and forced state are the same as the previous ones
 
 Examples:
     (begin example)
@@ -35,9 +36,14 @@ if (!isNil "_value" && {!([_setting, _value] call FUNC(check))}) exitWith {
     false
 };
 
+private _currentValue = [_setting, _source] call FUNC(get);
+private _currentForced = [_setting, _source] call FUNC(isForced);
+
 if (isNil "_forced") then {
-    _forced = [_setting, _source] call FUNC(isForced);
+    _forced = _currentForced;
 };
+
+if (!isNil "_currentValue" && {_currentValue isEqualTo _value && {_currentForced isEqualTo _forced}}) exitWith {5};
 
 private _return = 0;
 

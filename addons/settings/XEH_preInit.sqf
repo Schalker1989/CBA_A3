@@ -10,6 +10,8 @@ call FUNC(init);
 
 // event to refresh missionNamespace value if setting has changed and call public event
 [QGVAR(refreshSetting), {
+    if (isNil QGVAR(ready)) exitWith {};
+
     params ["_setting"];
     private _value = _setting call FUNC(get);
 
