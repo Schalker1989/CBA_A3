@@ -13,7 +13,13 @@ _ctrlSetting ctrlCommit 0;
 private _data = [_setting, _source, []];
 
 {
-    private _index = _ctrlSetting lbAdd (_labels select _forEachIndex);
+    private _label = _labels select _forEachIndex;
+
+    if (isLocalized _label) then {
+        _label = localize _label;
+    };
+
+    private _index = _ctrlSetting lbAdd _label;
     _ctrlSetting lbSetData [_index, str _index];
     (_data select 2) set [_index, _x];
 } forEach _values;

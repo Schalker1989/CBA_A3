@@ -7,6 +7,14 @@ _display setVariable [QGVAR(controls), []];
     private _setting = _x;
     (GVAR(defaultSettings) getVariable _setting) params ["_defaultValue", "_addon", "_settingType", "_values", "_labels", "_displayName", "_tooltip", "_trailingDecimals", "_enabledFor"];
 
+    if (isLocalized _displayName) then {
+        _displayName = localize _displayName;
+    };
+
+    if (isLocalized _tooltip) then {
+        _tooltip = localize _tooltip;
+    };
+
     private _addon = toLower _addon;
     _addons pushBackUnique _addon;
 

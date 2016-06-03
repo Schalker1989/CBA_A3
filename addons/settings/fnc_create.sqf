@@ -53,7 +53,7 @@ params [
     ["_enabledFor", nil, [[]]],
     ["_script", {}, [{}]]
 ];
-_title params [["_displayName", nil, [""]], ["_tooltip", "", [""]]];
+_title params [["_displayName", "", [""]], ["_tooltip", "", [""]]];
 
 if (_addon isEqualTo "" || _setting isEqualTo "") exitWith {false};
 
@@ -84,10 +84,7 @@ switch (toUpper _settingType) do {
         {
             if (isNil "_x") then { _x = _values select _forEachIndex };
             if !(_x isEqualType "") then { _x = str _x };
-            if ((_x select [0, 1]) isEqualTo "$") then {
-                _x = _x select [1];
-                if (isLocalized _x) then { _x = localize _x };
-            };
+            if ((_x select [0, 1]) isEqualTo "$") then { _x = _x select [1]; };
             _labels set [_forEachIndex, _x];
         } forEach _labels;
 

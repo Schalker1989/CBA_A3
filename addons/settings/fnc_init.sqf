@@ -51,10 +51,7 @@ if (isNil QGVAR(defaultSettings)) then {
                     {
                         if (isNil "_x") then { _x = _values select _forEachIndex };
                         if !(_x isEqualType "") then { _x = str _x };
-                        if ((_x select [0, 1]) isEqualTo "$") then {
-                            _x = _x select [1];
-                            if (isLocalized _x) then { _x = localize _x };
-                        };
+                        if ((_x select [0, 1]) isEqualTo "$") then { _x = _x select [1]; };
                         _labels set [_forEachIndex, _x];
                     } forEach _labels;
 
